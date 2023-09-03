@@ -1,0 +1,62 @@
+Our Goal State is -
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 0]
+
+Order in which Successor Nodes are generated -
+UP, DOWN, RIGHT, LEFT
+
+1. Number of Steps -
+
+    A. For Initial Configuration -
+        [2, 5, 3]
+        [4, 8, 1]
+        [7, 0, 6]
+        Number of Steps Taken -
+        BFS - 2480, Time - 0.06
+        DFS - 48595, Time - 1.63
+    B. For Initial Configuration -
+        [5, 3, 8]
+        [0, 2, 7]
+        [6, 4, 1]
+        Number of Steps Taken -
+        BFS - 113378, Time - 3.63
+        DFS - 162598, Time - 4.30
+    C. For Initial Configuration -
+        [8, 4, 6]
+        [3, 2, 5]
+        [7, 1, 0]
+        Note - No Solution found for above Grid
+        Number of Steps Taken -
+        BFS - 181441, Time - 5.66
+        DFS - 181441, Time - 4.66
+    D. For Initial Configuration -
+        [6, 7, 2]
+        [0, 5, 3]
+        [8, 4, 1]
+        Number of Steps Taken -
+        BFS - 158973, Time - 5.03
+        DFS - 63095, Time - 1.87
+
+2. Which is faster -
+    Based on above observations, we can say BFS is in general, faster than DFS.
+    Intitution -
+    Common Logic for BFS and DFS:
+        - We are maintaining one explored list(which tells us if a particular node have been visited before or not)
+        - findSuccessor: Every time we see a new node, we generate all its successor node, check if any of those nodes have been visited previously or not, it not, add it to the queue
+    For BFS-
+        - We are maintaining one queue
+        - Every iteration, pop one element from queue and check if it is goal state, if yes return, else find all valid successor and add it to queue, this will be similar to Level Order Traversal
+        - Keep iterating till queue is not empty
+    For DFS-
+        - We are maintaining one Stack
+        - Every iteration, pop one element from Stack and check if it is goal state, if yes return, else find all valid successor and add it to stack, here because of stack we keep going down the tree till that path is over or goal found
+        - Keep iterating till stack is not empty
+
+    Time Complexity using BFS - O(b^d)
+    Time Complexity using DFS - O(b^m)
+    where:
+        b: maximum branching factor(in this case branching factor at max is 4, since we can get at max 4 children)
+        d: depth of least cost solution
+        m: maximum depth of state space
+    In some case it is possible for DFS to get better solution than BFS(if initial branches is closer to goal state)(Case D)
